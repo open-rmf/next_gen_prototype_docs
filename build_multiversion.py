@@ -89,25 +89,28 @@ def generate_sources(nav_yaml, root_src_dir, tmp_dir, ngp_release):
     if version_tmp_dir.exists():
         shutil.rmtree(version_tmp_dir)
 
-    if ngp_release == base:
-        # Build the base release directly from the base content.
-        shutil.copytree(root_src_dir / base, version_tmp_dir, dirs_exist_ok=True)
-    else:
-        # 1. Start from the base (formerly "common") content
-        shutil.copytree(root_src_dir / base, version_tmp_dir, dirs_exist_ok=True)
+    # 1. Start from the base content
+    shutil.copytree(root_src_dir / base, version_tmp_dir, dirs_exist_ok=True)
 
-        # 2. Overlay release-specific files on top
-        release_src_dir = root_src_dir / ngp_release
-        shutil.copytree(release_src_dir, version_tmp_dir, dirs_exist_ok=True)
+    # 2. Overlay release-specific files on top. For the base release the
+    #    "release" directory is the base itself, so this step is a no-op.
+    if ngp_release != base:
+        shutil.copytree(root_src_dir / ngp_release, version_tmp_dir, dirs_exist_ok=True)
 
-    # 3. Copy sphinx infrastructure files
+    # 3. Overlay version-independent shared content ("common/") last so it
+    #    always wins, even if a release ships its own copy of the same path.
+    common_dir = root_src_dir / "common"
+    if common_dir.is_dir():
+        shutil.copytree(common_dir, version_tmp_dir, dirs_exist_ok=True)
+
+    # 4. Copy sphinx infrastructure files
     for dir in ["_static", "_templates"]:
         shutil.copytree(root_src_dir / dir, version_tmp_dir / dir, dirs_exist_ok=True)
     shutil.copy2(root_src_dir / "base_conf.py", version_tmp_dir)
     shutil.copy2(root_src_dir / "conf.py", version_tmp_dir)
     shutil.copy2(root_src_dir / "build_utils.py", version_tmp_dir)
 
-    # 4. Generate the source manifest for "Edit on GitHub" links
+    # 5. Generate the source manifest for "Edit on GitHub" links
     manifest = {}
     base_dir = root_src_dir / base
     for path in base_dir.glob('**/*'):
@@ -121,6 +124,15 @@ def generate_sources(nav_yaml, root_src_dir, tmp_dir, ngp_release):
             if path.is_file():
                 rel_path = path.relative_to(release_dir)
                 manifest[str(rel_path)] = f"{ngp_release}/{rel_path}"
+
+    # Shared content lives in "common/" and has the highest precedence, so
+    # its entries overwrite any base/release entry for the same path.
+    common_dir = root_src_dir / "common"
+    if common_dir.is_dir():
+        for path in common_dir.glob('**/*'):
+            if path.is_file():
+                rel_path = path.relative_to(common_dir)
+                manifest[str(rel_path)] = f"common/{rel_path}"
 
     manifest_path = version_tmp_dir / 'source_manifest.json'
     with open(manifest_path, 'w') as f:
@@ -182,11 +194,17 @@ def generate_sources(nav_yaml, root_src_dir, tmp_dir, ngp_release):
             file_url = page["name"]
 
             # If the page references an existing file, resolve its path
-            # (stripping the base-commit prefix, e.g. "251cfbf:") and rename
-            # the source file in the temporary directory if its custom URL
-            # path name differs from the underlying filename.
+            # (stripping the prefix of its origin directory, e.g. a base
+            # commit like "251cfbf:" or the shared "common:" tree) and
+            # rename the source file in the temporary directory if its
+            # custom URL path name differs from the underlying filename.
+            # The prefix is only metadata (it informs the "Edit on GitHub"
+            # source manifest); the file itself already exists in the
+            # version directory from the copy steps above.
             if "file" in page:
-                file_path = page["file"].removeprefix(f"{base}:")
+                file_path = page["file"]
+                if ":" in file_path:
+                    file_path = file_path.split(":", 1)[1]
                 new_file_path = handle_file_url_rename(file_path, file_url)
             else:
                 new_file_path = f"{file_url}.md"

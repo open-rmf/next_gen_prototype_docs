@@ -48,13 +48,13 @@ def load_releases(index_file):
 
 def create_file_rename_map(nav_yaml_pages):
     file_name_map = {}
-    base_prefix = None
     for page in nav_yaml_pages:
         if "file" in page:
             file_ref = page["file"]
-            # Strip the base-commit prefix (e.g. "251cfbf:") if present.
+            # Strip the origin prefix (base commit, e.g. "9403fb1:", or the
+            # shared tree, e.g. "common:") if present.
             if ":" in file_ref:
-                base_prefix, file_ref = file_ref.split(":", 1)
+                _, file_ref = file_ref.split(":", 1)
             file_name_map[page["name"]] = file_ref
 
         children = page.get("children")

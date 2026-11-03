@@ -85,16 +85,16 @@ pages:
     children:
       - name: reference
         title: Reference
-        file: 9403fb1:reference.md
+        file: common:reference.md
       - name: release_features
         title: Release Features
-        file: 9403fb1:reference/release_features.md
+        file: common:reference/release_features.md
       - name: releases
         title: Releases
-        file: 9403fb1:reference/releases.md
+        file: common:reference/releases.md
       - name: governance
         title: Governance
-        file: 9403fb1:reference/governance.md
+        file: common:reference/governance.md
       - name: support
         title: Support
-        file: 9403fb1:reference/support.md
+        file: common:reference/support.md

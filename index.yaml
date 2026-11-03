@@ -8,6 +8,12 @@
 #   (plus keeping "preferred: true" on the release that maps to it or
 #   the newest one you want advertised as "latest").
 # - "releases:" is the set of versioned snapshots.
+# - "common/" (at the repo root, next to the release directories) holds
+#   version-independent content that is shared by ALL releases — it is
+#   overlaid last, so it always wins over any file of the same path in a
+#   release directory (whether it comes from the base or the release itself).
+#   Reference it with the "common:" prefix in index.yaml files
+#   (e.g. "common:reference/governance.md"). The Reference section lives here.
 # - Exactly one release must have "preferred: true" (it becomes "latest").
 #
 # See the README for the full reference.
