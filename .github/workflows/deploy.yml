@@ -1,0 +1,62 @@
+name: Build and Deploy Docs
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    concurrency:
+      group: pages
+      cancel-in-progress: false
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Build docs with Sphinx
+        # Multi-release build: assembles per-release trees in .tmp/ and builds
+        # them to .build/docs/<release>/, plus "latest"/"all" pointers.
+        # NGP_DEPLOY_URL must be the public origin of the Pages site so the
+        # version-switcher switcher.json URLs embedded in every page (and the
+        # url entries inside switcher.json) point at this site instead of
+        # localhost. See base_conf.py.
+        env:
+          NGP_DEPLOY_URL: "https://open-rmf.github.io"
+          # The Pages site lives under /next_gen_prototype_docs (project page); prepend it to
+          # every switcher URL so entries resolve on the live site.
+          NGP_DOCS_PATH: "/next_gen_prototype_docs"
+        run: python build_multiversion.py --pointers --output_dir .build
+
+      - name: Setup Pages
+        id: pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload build artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: .build/docs
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+        uses: actions/deploy-pages@v4
