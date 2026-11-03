@@ -323,13 +323,22 @@ def main(argv=None):
                 unknown_args,
             )
 
-        # Create a redirect to "/latest"
+        # Create a redirect to "/latest". The target must be absolute (site
+        # root) because a relative "latest" would resolve to /latest on the
+        # domain root and 404; GitHub Pages then falls back to showing the
+        # repo README at the site root. Built from NGP_DEPLOY_URL +
+        # NGP_DOCS_PATH (project pages are served under
+        # <owner>.github.io/<repo>/); falls back to the relative "latest".
+        deploy_base = (
+            (os.environ.get("NGP_DEPLOY_URL") or "").rstrip("/")
+            + (os.environ.get("NGP_DOCS_PATH") or "").rstrip("/")
+        ) or "latest"
         redirect_page = build_docs_dir / "index.html"
-        redirect_page.write_text("""\
+        redirect_page.write_text(f"""\
 <!DOCTYPE html>
 <html>
   <head>
-    <meta content="0; url=latest" http-equiv="refresh" />
+    <meta content="0; url={deploy_base}/latest" http-equiv="refresh" />
   </head>
 </html>
 """)
