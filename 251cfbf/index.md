@@ -65,7 +65,6 @@ for_developers/development/release
 :titlesonly:
 :caption: Reference
 
-reference
 reference/release_features
 reference/releases
 reference/governance

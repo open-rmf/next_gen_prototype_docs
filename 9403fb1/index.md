@@ -77,7 +77,6 @@ for_developers/howto_guides
 :titlesonly:
 :caption: Reference
 
-reference
 reference/release_features
 reference/releases
 reference/governance

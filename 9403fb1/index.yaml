@@ -83,9 +83,6 @@ pages:
         file: 9403fb1:for_developers/development/release.md
   - section: Reference
     children:
-      - name: reference
-        title: Reference
-        file: common:reference.md
       - name: release_features
         title: Release Features
         file: common:reference/release_features.md
