@@ -355,11 +355,21 @@ def main(argv=None):
         # domain root and 404; GitHub Pages then falls back to showing the
         # repo README at the site root. Built from NGP_DEPLOY_URL +
         # NGP_DOCS_PATH (project pages are served under
-        # <owner>.github.io/<repo>/); falls back to the relative "latest".
+        # <owner>.github.io/<repo>/); falls back to the empty base, which
+        # yields a site-root-absolute "/latest" (correct for local dev).
         deploy_base = (
             (os.environ.get("NGP_DEPLOY_URL") or "").rstrip("/")
             + (os.environ.get("NGP_DOCS_PATH") or "").rstrip("/")
-        ) or "latest"
+        ) or ""
+        # Guard: the target must always be an absolute URL. A relative "latest"
+        # (or a duplicated "latest/latest") breaks at runtime, so fail the build
+        # immediately rather than ship a broken root redirect.
+        if not deploy_base.startswith("http") and deploy_base == "latest":
+            raise RuntimeError(
+                f"Refusing to generate a broken root redirect "
+                f"(would resolve to '/latest/latest'). "
+                f"Set NGP_DEPLOY_URL or NGP_DOCS_PATH for a correct target."
+            )
         redirect_page = build_docs_dir / "index.html"
         redirect_page.write_text(f"""\
 <!DOCTYPE html>
