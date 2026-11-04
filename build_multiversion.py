@@ -156,12 +156,21 @@ def generate_sources(nav_yaml, root_src_dir, tmp_dir, ngp_release):
         elif release.get("dev", False):
             name += " (dev)"
 
+        is_preferred = release.get("preferred", False)
+        # The preferred release is published at the canonical "/latest" pointer,
+        # and its switcher entry is the target of the "switch to latest" banner.
+        if is_preferred:
+            name = "latest"
+            release_url = f"{deploy_url}{docs_path}/latest/"
+        else:
+            release_url = f"{deploy_url}{docs_path}/{release['name']}/"
+
         switcher.append(
             {
                 "name": name,
                 "version": release["name"],
-                "url": f"{deploy_url}{docs_path}/{release['name']}/",
-                "preferred": release.get("preferred", False)
+                "url": release_url,
+                "preferred": is_preferred
             }
         )
 

@@ -60,6 +60,7 @@ nitpicky = False
 html_theme = "pydata_sphinx_theme"
 html_static_path = ["_static"]
 html_css_files = ["css/gazebo.css"]
+html_js_files = ["js/latest-banner.js"]
 html_favicon = "_static/icon/favicon.ico"
 
 html_theme_options = {
@@ -81,7 +82,7 @@ html_theme_options = {
         "image_dark": "_static/images/logos/logo_dark.svg",
     },
     "check_switcher": False,
-    "show_version_warning_banner": False,
+    "show_version_warning_banner": True,
 }
 
 html_sidebars = {"**": ["sidebar-nav"]}
