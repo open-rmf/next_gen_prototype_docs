@@ -18,14 +18,16 @@ pip install -r requirements.txt
 ```
 
 ```bash
-# build the site
 . .venv/bin/activate
+```
+
+```bash
+# Build the site
 python build_multiversion.py --pointers --output_dir .build
 ```
 
 ```bash
-# preview
-. .venv/bin/activate
+# Preview the site
 python -m http.server -d .build/docs
 ```
 
