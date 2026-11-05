@@ -41,31 +41,31 @@ pages:
         file: 9403fb1:for_developers/architecture.md
       - name: library_howtos
         title: Library How-to Guides
-        file: 9403fb1:for_developers/library_howtos.md
+        file: common:for_developers/library_howtos.md
       - name: roadmap
         title: Roadmap
-        file: 9403fb1:for_developers/roadmap.md
+        file: common:for_developers/roadmap.md
       - name: development
         title: Development
-        file: 9403fb1:for_developers/development.md
+        file: common:for_developers/development.md
       - name: howto_guides
         title: How-to Guides
         file: 9403fb1:for_developers/howto_guides.md
       - name: contributing
         title: Contributing
-        file: 9403fb1:for_developers/development/contributing.md
+        file: common:for_developers/development/contributing.md
       - name: maintainers
         title: Maintainers
-        file: 9403fb1:for_developers/development/maintainers.md
+        file: common:for_developers/development/maintainers.md
       - name: ci
         title: CI
-        file: 9403fb1:for_developers/development/ci.md
+        file: common:for_developers/development/ci.md
       - name: howto_ci
         title: CI (How-to)
         file: 9403fb1:for_developers/howto_guides/ci.md
       - name: release
         title: Release
-        file: 9403fb1:for_developers/development/release.md
+        file: common:for_developers/development/release.md
   - section: Reference
     children:
       - name: reference

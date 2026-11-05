@@ -53,11 +53,7 @@ for_developers/library_howtos
 for_developers/roadmap
 for_developers/development
 for_developers/howto_guides
-for_developers/development/contributing
-for_developers/development/maintainers
-for_developers/development/ci
 for_developers/howto_guides/ci
-for_developers/development/release
 ```
 
 ```{toctree}
