@@ -9,7 +9,11 @@ orphan: true
 Launch the fully standalone path server dashboard:
 
 ```bash
-ros2 launch rmf_path_server_demo demo.launch.py
+docker run --rm \
+  --name next_gen_prototype \
+  -p 8080:8080 \
+  ros2_rust_base:jazzy \
+  bash -c "source /nav2_traffic_ws/install/setup.bash && ros2 launch rmf_path_server_demo demo.launch.py"
 ```
 
 1. Open `http://localhost:8080` in your web browser.
