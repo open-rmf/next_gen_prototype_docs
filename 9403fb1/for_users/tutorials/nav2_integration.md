@@ -2,11 +2,11 @@
 orphan: true
 ---
 
-# Nav2 Integration for Next-Gen RMF
+# Nav2 Integration Demo
 
 ![Nav2 Traffic Demo](https://raw.githubusercontent.com/open-rmf/next_gen_prototype/main/nav2_integration/docs/images/nav2_traffic_demo.gif)
 
-This folder contains the various packages required for Nav2 integration and demonstrates how Next Gen prototype messages and traffic management design is used for multi-robot coordination. The core `rmf_nav2_traffic` plugin manages incoming navigation requests and plans produced by the path server, and publishes action goals to the Nav2 server accordingly. We also incorporate [spatio_temporal_partition_layer](https://github.com/arjo129/spatio_temporal_partitioning) into the `rmf_nav2_traffic` plugin, where safe zone data is used to update the Nav2 costmap and provide partitions to facilitate path-planning.
+This tutorial contains the various packages required for Nav2 integration and demonstrates how Next Gen prototype messages and traffic management design is used for multi-robot coordination. The core `rmf_nav2_traffic` plugin manages incoming navigation requests and plans produced by the path server, and publishes action goals to the Nav2 server accordingly. We also incorporate [spatio_temporal_partition_layer](https://github.com/arjo129/spatio_temporal_partitioning) into the `rmf_nav2_traffic` plugin, where safe zone data is used to update the Nav2 costmap and provide partitions to facilitate path-planning.
 
 ## InnerNavigationServices Workflow Diagram
 

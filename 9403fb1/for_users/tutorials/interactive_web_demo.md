@@ -2,7 +2,7 @@
 orphan: true
 ---
 
-# Running the Interactive Web Demonstration
+# Interactive Web Demonstration
 
 <video src="https://github.com/user-attachments/assets/d5793eee-515d-49a9-a92c-9926617b48ed" controls width="100%"></video>
 
