@@ -51,7 +51,7 @@ def create_file_rename_map(nav_yaml_pages):
     for page in nav_yaml_pages:
         if "file" in page:
             file_ref = page["file"]
-            # Strip the origin prefix (base commit, e.g. "9403fb1:", or the
+            # Strip the origin prefix (base commit, e.g. "334e5b2:", or the
             # shared tree, e.g. "common:") if present.
             if ":" in file_ref:
                 _, file_ref = file_ref.split(":", 1)

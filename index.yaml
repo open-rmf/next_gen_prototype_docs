@@ -18,17 +18,17 @@
 #
 # See the README for the full reference.
 
-base: 9403fb1
+base: 334e5b2
 
 releases:
-  - name: 9403fb1
+  - name: 334e5b2
     base: true
     lts: false
     dev: false
     eol: false
     preferred: true
-    description: Canonical base snapshot (commit 9403fb1 on open-rmf/next_gen_prototype main)
-    commit_url: https://github.com/open-rmf/next_gen_prototype/commit/9403fb1
+    description: Canonical base snapshot (commit 334e5b2 on open-rmf/next_gen_prototype main)
+    commit_url: https://github.com/open-rmf/next_gen_prototype/commit/334e5b2
 
   - name: 251cfbf
     base: false

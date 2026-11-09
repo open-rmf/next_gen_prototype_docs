@@ -1,7 +1,7 @@
 # NGP Documentation
 
 Welcome to the Next-Generation Prototype (NGP) documentation portal.
-This snapshot is based on commit `9403fb1` of `open-rmf/next_gen_prototype`
+This snapshot is based on commit `334e5b2` of `open-rmf/next_gen_prototype`
 (main branch).
 
 ```{warning}

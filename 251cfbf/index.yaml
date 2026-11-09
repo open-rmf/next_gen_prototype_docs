@@ -3,42 +3,42 @@ pages:
     children:
       - name: get_started
         title: Get Started
-        file: 9403fb1:get_started.md
+        file: 334e5b2:get_started.md
       - name: getting_started
         title: Getting Started
-        file: 9403fb1:get_started/getting_started.md
+        file: 334e5b2:get_started/getting_started.md
       - name: tutorials
         title: Tutorials (MyST demo)
-        file: 9403fb1:get_started/tutorials.md
+        file: 334e5b2:get_started/tutorials.md
       - name: api
         title: API
-        file: 9403fb1:get_started/api.md
+        file: 334e5b2:get_started/api.md
   - section: For Users
     children:
       - name: for_users
         title: For Users
-        file: 9403fb1:for_users.md
+        file: 334e5b2:for_users.md
       - name: tutorials
         title: Tutorials
-        file: 9403fb1:for_users/tutorials.md
+        file: 334e5b2:for_users/tutorials.md
       - name: how_to_guides
         title: How-to Guides
-        file: 9403fb1:for_users/how_to_guides.md
+        file: 334e5b2:for_users/how_to_guides.md
       - name: web_visualization
         title: Web Visualization
-        file: 9403fb1:for_users/how_to_guides/web_visualization.md
+        file: 334e5b2:for_users/how_to_guides/web_visualization.md
         children: []
       - name: moving_robot
         title: Moving Robot
-        file: 9403fb1:for_users/tutorials/moving_robot.md
+        file: 334e5b2:for_users/tutorials/moving_robot.md
   - section: For Developers
     children:
       - name: for_developers
         title: For Developers
-        file: 9403fb1:for_developers.md
+        file: 334e5b2:for_developers.md
       - name: architecture
         title: Architecture
-        file: 9403fb1:for_developers/architecture.md
+        file: 334e5b2:for_developers/architecture.md
       - name: library_howtos
         title: Library How-to Guides
         file: common:for_developers/library_howtos.md
@@ -50,7 +50,7 @@ pages:
         file: common:for_developers/development.md
       - name: howto_guides
         title: How-to Guides
-        file: 9403fb1:for_developers/howto_guides.md
+        file: 334e5b2:for_developers/howto_guides.md
       - name: contributing
         title: Contributing
         file: common:for_developers/development/contributing.md
@@ -62,7 +62,7 @@ pages:
         file: common:for_developers/development/ci.md
       - name: howto_ci
         title: CI (How-to)
-        file: 9403fb1:for_developers/howto_guides/ci.md
+        file: 334e5b2:for_developers/howto_guides/ci.md
       - name: release
         title: Release
         file: common:for_developers/development/release.md
